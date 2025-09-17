@@ -1,0 +1,71 @@
+<?php
+function withdraw($balance, $amount) {
+    if ($amount > $balance) 
+        throw new Exception("Insufficient Balance!");
+    if ($amount <= 0) 
+        throw new Exception("Invalid withdrawal amount!");
+    
+    echo "<p class='success'>Withdrawn: $amount</p>";
+    echo "<p class='info'>Balance: " . ($balance - $amount) . "</p>";
+    return $balance - $amount;
+}
+
+try {
+    $balance = 5000;
+    echo "<div class='box'><h2>Bank Transaction</h2>";
+    echo "<p class='info'>Initial Balance: $balance</p>";
+    $balance = withdraw($balance, 2000);
+    $balance = withdraw($balance, 4000); 
+} catch (Exception $e) {
+    echo "<p class='error'>Error: " . $e->getMessage() . "</p>";
+}
+echo "</div>";
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .box {
+            width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .info {
+            color: #555;
+            margin: 5px 0;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 8px;
+            background: #ffeaea;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
+
+
