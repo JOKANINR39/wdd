@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anu's Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9fb;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(135deg, purple, indigo);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    nav {
+      background: purple;
+      text-align: center;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: purple;
+    }
+    .about p, .contact p {
+      font-weight: bold;
+    }
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    footer {
+      background: purple;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hi, I'm JO 👩‍💻</h1>
+  <p>A Computer Science Student passionate about Web Development</p>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about" class="about">
+  <h2>About Me</h2>
+  <p style="color:green;">Hello! I'm Jo, a computer science student passionate about creating modern, responsive, and user-friendly websites. I enjoy learning new technologies and building creative projects.</p>
+</section>
+
+<section id="skills">
+  <h2>My Skills</h2>
+  <div class="skills">
+    <div class="skill-card">
+      <h3>🌐 Web Development</h3>
+      <p>HTML, CSS, JavaScript</p>
+    </div>
+    <div class="skill-card">
+      <h3>⚙️ Backend</h3>
+      <p>PHP, MySQL</p>
+    </div>
+    <div class="skill-card">
+      <h3>📊 Tools</h3>
+      <p>Git, VS Code</p>
+    </div>
+    <div class="skill-card">
+      <h3>🚀 Learning</h3>
+      <p>React, Node.js</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p style="color:blue;">📧 Email: jokani@gmail.com</p>
+  <p>💼 LinkedIn: <a href="#" target="_blank">linkedin.com/in/anu</a></p>
+</section>
+
+<footer>
+  <p>&copy; 2025 jo. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+
+
+
