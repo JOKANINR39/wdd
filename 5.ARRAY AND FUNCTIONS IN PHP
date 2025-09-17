@@ -1,0 +1,79 @@
+<?php
+function calculateGrade($marks) {
+    if ($marks >= 90) return "A";
+    elseif ($marks >= 75) return "B";
+    elseif ($marks >= 50) return "C";
+    else return "F";
+}
+
+$students = ["Alice" => 85, "Bob" => 65, "Charlie" => 45];
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background: #f1f1f1;
+        }
+        td:first-child {
+            font-weight: bold;
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Grades</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Grade</th>
+            </tr>
+            <?php foreach ($students as $name => $marks): ?>
+                <tr>
+                    <td><?php echo $name; ?></td>
+                    <td><?php echo $marks; ?></td>
+                    <td><?php echo calculateGrade($marks); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</body>
+</html>
+
+
