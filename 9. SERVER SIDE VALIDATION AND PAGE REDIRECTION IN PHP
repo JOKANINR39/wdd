@@ -1,0 +1,66 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+
+    if (empty($name)) {
+        $error = "❌ Name is required.";
+    } else {
+        header('Location: success.php');
+        exit;
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server Side Validation</title>
+    <style>
+        body {font-family: Arial, sans-serif; background:#f8f9fa; display:flex; justify-content:center; align-items:center; height:100vh;}
+        .form-box {background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); width:300px; text-align:center;}
+        h2 {color:#007bff;}
+        input[type=text] {width:90%; padding:8px; margin:10px 0; border:1px solid #ccc; border-radius:5px;}
+        button {padding:8px 15px; border:none; background:#007bff; color:#fff; border-radius:5px; cursor:pointer;}
+        button:hover {background:#0056b3;}
+        .error {color:red; margin-top:10px; font-weight:bold;}
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Enter Your Name</h2>
+        <form method="post">
+            <input type="text" name="name" placeholder="Enter name" />
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+    </div>
+</body>
+</html>
+
+9.SUCCESS.PHP
+<?php
+// success.php
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+    <style>
+        body {font-family: Arial, sans-serif; background:#f8f9fa; display:flex; justify-content:center; align-items:center; height:100vh;}
+        .success-box {background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; width:350px;}
+        h2 {color:green; margin-bottom:15px;}
+        p {font-size:16px; color:#333;}
+        a {display:inline-block; margin-top:15px; padding:8px 15px; text-decoration:none; background:#007bff; color:#fff; border-radius:5px;}
+        a:hover {background:#0056b3;}
+    </style>
+</head>
+<body>
+    <div class="success-box">
+        <h2>✅ Success!</h2>
+        <p>Form submitted successfully! Welcome!</p>
+        <a href="index.php">Go Back</a>
+    </div>
+</body>
+</html>
+
+
