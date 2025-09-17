@@ -1,0 +1,88 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+if (isset($_GET['add'])) {
+    $_SESSION['cart'][] = $_GET['add'];
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .items, .cart {
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            padding: 6px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn {
+            display: inline-block;
+            margin: 5px 0;
+            padding: 8px 12px;
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .empty {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🛒 Cart Items</h2>
+        <div class="cart">
+            <?php
+            if (empty($_SESSION['cart'])) {
+                echo "<p class='empty'>No items in cart.</p>";
+            } else {
+                foreach ($_SESSION['cart'] as $c) {
+                    echo "<div class='cart-item'>- $c</div>";
+                }
+            }
+            ?>
+        </div>
+
+        <h2>🍎 Available Items</h2>
+        <div class="items">
+            <?php
+            $items = ["Apple", "Banana", "Orange"];
+            foreach ($items as $i) {
+                echo "<a class='btn' href='?add=$i'>Add $i</a><br>";
+            }
+            ?>
+        </div>
+    </div>
+</body>
+</html>
+
+
