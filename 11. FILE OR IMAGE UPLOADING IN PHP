@@ -1,0 +1,50 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['photo'])) {
+    // Create uploads folder if not exists
+    if (!is_dir('uploads')) {
+        mkdir('uploads', 0777, true);
+    }
+
+    $target = 'uploads/' . basename($_FILES['photo']['name']);
+
+    // Check if file is an image
+    if (getimagesize($_FILES['photo']['tmp_name'])) {
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
+            echo "<p class='success'>✅ Photo uploaded successfully!</p>";
+            echo "<img src='$target' width='200' style='margin-top:10px; border:1px solid #ccc;'>";
+        } else {
+            echo "<p class='error'>❌ Upload failed. Check folder permissions.</p>";
+        }
+    } else {
+        echo "<p class='error'>❌ Invalid image file.</p>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+    <style>
+        body {font-family: Arial; background:#f8f9fa; text-align:center; padding:20px;}
+        .upload-box {background:#fff; border:1px solid #ccc; padding:20px; border-radius:8px; display:inline-block;}
+        h2 {color:#007bff;}
+        .success {color:green; font-weight:bold;}
+        .error {color:red; font-weight:bold;}
+        input[type=file] {margin:10px;}
+        button {padding:8px 15px; border:none; background:#007bff; color:#fff; border-radius:5px; cursor:pointer;}
+        button:hover {background:#0056b3;}
+    </style>
+</head>
+<body>
+    <div class="upload-box">
+        <h2>Upload an Image</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" accept="image/*" required />
+            <br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
