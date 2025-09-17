@@ -1,0 +1,67 @@
+<?php
+$text = "Hello World";
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP String Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 450px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        td:first-child {
+            font-weight: bold;
+            color: #34495e;
+            width: 45%;
+        }
+        td:last-child {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PHP String Functions</h2>
+        <table>
+            <tr><td>Uppercase:</td><td><?php echo strtoupper($text); ?></td></tr>
+            <tr><td>Lowercase:</td><td><?php echo strtolower($text); ?></td></tr>
+            <tr><td>Length:</td><td><?php echo strlen($text); ?></td></tr>
+            <tr><td>Reversed:</td><td><?php echo strrev($text); ?></td></tr>
+            <tr><td>Word Count:</td><td><?php echo str_word_count($text); ?></td></tr>
+            <tr><td>Position of 'World':</td><td><?php echo strpos($text, "World"); ?></td></tr>
+            <tr><td>Replace 'World' with 'PHP':</td><td><?php echo str_replace("World", "PHP", $text); ?></td></tr>
+            <tr><td>Substring (0, 5):</td><td><?php echo substr($text, 0, 5); ?></td></tr>
+            <tr><td>Add Slashes:</td><td><?php echo addslashes($text); ?></td></tr>
+            <tr><td>Trimmed:</td><td>'<?php echo trim("   Hello World   "); ?>'</td></tr>
+        </table>
+    </div>
+</body>
+</html>
+
+
