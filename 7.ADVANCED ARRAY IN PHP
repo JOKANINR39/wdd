@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Salary Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .employee-card {
+            background: #fff;
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .employee-card strong {
+            color: #007BFF;
+        }
+        .payroll-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9f7ef;
+            border: 1px solid #2ecc71;
+            border-radius: 6px;
+            width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Employee Salary Details</h2>
+
+<?php
+$employees = [
+    ["name" => "John", "salary" => 5000],
+    ["name" => "Jane", "salary" => 6000],
+    ["name" => "Alice", "salary" => 7000],
+];
+
+$totalPayroll = 0;
+
+foreach ($employees as $emp) {
+    $name = $emp['name'];
+    $salary = $emp['salary'];
+
+    // Calculate bonus
+    $bonus = ($salary > 5500) ? $salary * 0.10 : $salary * 0.05;
+    $netSalary = $salary + $bonus;
+    $totalPayroll += $netSalary;
+
+    echo "<div class='employee-card'>";
+    echo "<p><strong>Employee:</strong> $name</p>";
+    echo "<p><strong>Base Salary:</strong> \$$salary</p>";
+    echo "<p><strong>Bonus:</strong> \$$bonus</p>";
+    echo "<p><strong>Net Salary:</strong> \$$netSalary</p>";
+    echo "</div>";
+}
+
+echo "<div class='payroll-summary'>";
+echo "Total Payroll (including bonuses): \$$totalPayroll";
+echo "</div>";
+?>
+
+</body>
+</html>
+
+
