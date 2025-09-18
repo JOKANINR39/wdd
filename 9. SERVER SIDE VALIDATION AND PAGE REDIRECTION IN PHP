@@ -1,66 +1,149 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
 
-    if (empty($name)) {
-        $error = "❌ Name is required.";
+<?php
+// Check if form is submitted
+$error = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if ($username === "admin" && $password === "pass") {
+        header("Location: dashboard.php");
+        exit();
     } else {
-        header('Location: success.php');
-        exit;
+        $error = "Invalid login";
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Server Side Validation</title>
-    <style>
-        body {font-family: Arial, sans-serif; background:#f8f9fa; display:flex; justify-content:center; align-items:center; height:100vh;}
-        .form-box {background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); width:300px; text-align:center;}
-        h2 {color:#007bff;}
-        input[type=text] {width:90%; padding:8px; margin:10px 0; border:1px solid #ccc; border-radius:5px;}
-        button {padding:8px 15px; border:none; background:#007bff; color:#fff; border-radius:5px; cursor:pointer;}
-        button:hover {background:#0056b3;}
-        .error {color:red; margin-top:10px; font-weight:bold;}
-    </style>
-</head>
-<body>
-    <div class="form-box">
-        <h2>Enter Your Name</h2>
-        <form method="post">
-            <input type="text" name="name" placeholder="Enter name" />
-            <br>
-            <button type="submit">Submit</button>
-        </form>
-        <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
-    </div>
-</body>
-</html>
 
-9.SUCCESS.PHP
-<?php
-// success.php
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-    <style>
-        body {font-family: Arial, sans-serif; background:#f8f9fa; display:flex; justify-content:center; align-items:center; height:100vh;}
-        .success-box {background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; width:350px;}
-        h2 {color:green; margin-bottom:15px;}
-        p {font-size:16px; color:#333;}
-        a {display:inline-block; margin-top:15px; padding:8px 15px; text-decoration:none; background:#007bff; color:#fff; border-radius:5px;}
-        a:hover {background:#0056b3;}
-    </style>
-</head>
-<body>
-    <div class="success-box">
-        <h2>✅ Success!</h2>
-        <p>Form submitted successfully! Welcome!</p>
-        <a href="index.php">Go Back</a>
-    </div>
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="post" action="">
+        <label>Username:</label>
+        <input type="text" name="username" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <?php if ($error): ?>
+        <div class="error"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+</div>
+
 </body>
 </html>
 
 
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9f5ff;
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard-container {
+            max-width: 600px;
+            margin: 80px auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555;
+            font-size: 18px;
+        }
+        .logout-button {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Welcome to the Dashboard!</h1>
+    <p>Login successful.</p>
+    
+    <a class="logout-button" href="login.php">Logout</a>
+</div>
+
+</body>
+</html>
