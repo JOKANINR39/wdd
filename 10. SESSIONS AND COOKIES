@@ -1,88 +1,89 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+// --- Handle Logout ---
+if (isset($_POST['logout'])) {
+    session_destroy();
+    setcookie("user", "", time() - 3600, "/"); // clear cookie
+    header("Location: " . $_SERVER['PHP_SELF']); // reload page
+    exit;
 }
 
-if (isset($_GET['add'])) {
-    $_SESSION['cart'][] = $_GET['add'];
+// --- Handle Login ---
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+
+    // store in session
+    $_SESSION['username'] = $username;
+
+    // if remember me is checked, store in cookie for 1 hour
+    if (isset($_POST['remember'])) {
+        setcookie("user", $username, time() + 3600, "/");
+    }
 }
+
+// --- Check if already logged in ---
+$sessionUser = $_SESSION['username'] ?? null;
+$cookieUser  = $_COOKIE['user'] ?? null;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shopping Cart</title>
+    <title>Session & Cookie Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 20px;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        .container {
-            width: 500px;
-            margin: auto;
+        .box {
             background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            width: 320px;
+            text-align: center;
         }
-        h2 {
-            color: #007bff;
-            margin-bottom: 10px;
+        h2 { color: #2c3e50; }
+        input {
+            padding: 8px;
+            margin: 8px 0;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
         }
-        .items, .cart {
-            margin-bottom: 20px;
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer;
         }
-        .cart-item {
-            padding: 6px;
-            border-bottom: 1px solid #ddd;
-        }
-        .btn {
-            display: inline-block;
-            margin: 5px 0;
-            padding: 8px 12px;
-            text-decoration: none;
-            background: #007bff;
-            color: white;
-            border-radius: 4px;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        .empty {
-            color: #888;
-            font-style: italic;
-        }
+        button:hover { background: #217dbb; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>🛒 Cart Items</h2>
-        <div class="cart">
-            <?php
-            if (empty($_SESSION['cart'])) {
-                echo "<p class='empty'>No items in cart.</p>";
-            } else {
-                foreach ($_SESSION['cart'] as $c) {
-                    echo "<div class='cart-item'>- $c</div>";
-                }
-            }
-            ?>
-        </div>
-
-        <h2>🍎 Available Items</h2>
-        <div class="items">
-            <?php
-            $items = ["Apple", "Banana", "Orange"];
-            foreach ($items as $i) {
-                echo "<a class='btn' href='?add=$i'>Add $i</a><br>";
-            }
-            ?>
-        </div>
-    </div>
+<div class="box">
+    <?php if ($sessionUser): ?>
+        <h2>Welcome, <?= htmlspecialchars($sessionUser) ?> 👋</h2>
+        <p><b>Session Value:</b> <?= htmlspecialchars($sessionUser) ?></p>
+        <p><b>Cookie Value:</b> <?= $cookieUser ? htmlspecialchars($cookieUser) : "Not set" ?></p>
+        <form method="post">
+            <button name="logout">Logout</button>
+        </form>
+    <?php else: ?>
+        <h2>Login</h2>
+        <form method="post">
+            <input type="text" name="username" placeholder="Enter username" required><br>
+            <label><input type="checkbox" name="remember"> Remember me (cookie)</label><br>
+            <button name="login">Login</button>
+        </form>
+    <?php endif; ?>
+</div>
 </body>
 </html>
-
-
